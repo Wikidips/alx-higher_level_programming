@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """
-Script that accepts two arguments to solve a challenge
+Script that takes 2 arguments in order to solve this challenge
 """
 import requests
 from sys import argv
 
 if __name__ == '__main__':
-    url = f"https://api.github.com/repos/{argv[1]}/{argv[2]}/commits"
-    response = requests.get(url)
-    commits = response.json()
+    url = "https://api.github.com/repos/{}/{}/commits".format(argv[2], argv[1])
+    r = requests.get(url)
+    commits = r.json()
     for commit in commits[:10]:
-        print(f"{commit.get('sha')}: {commit.get('commit').get('author').get('name')}")
+        print(commit.get('sha'), end=': ')
+        print(commit.get('commit').get('author').get('name'))
